@@ -1,0 +1,47 @@
+{
+  "name": "react-typescript",
+  "version": "1.0.0",
+  "description": "React TypeScript Biolerplate (dev)",
+  "main": "index.ts",
+  "author": "Adli Fariz Bonaputra",
+  "license": "ISC",
+  "private": true,
+  "spdx": false,
+  "scripts": {
+    "start": "NODE_ENV=production node server",
+    "dev": "node server",
+    "build": "webpack -p --config webpack.config.prod.js --progress"
+  },
+  "dependencies": {
+    "@types/react": "^16.0.34",
+    "@types/react-dom": "^16.0.3",
+    "@types/react-redux": "^5.0.14",
+    "@types/react-router-dom": "^4.2.3",
+    "axios": "^0.17.1",
+    "bootstrap": "4.0.0-beta.3",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "popper.js": "^1.12.9",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "webpack-dev-middleware": "^2.0.4"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.0.10",
+    "sass-loader": "^6.0.6",
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.6.2",
+    "typings-for-css-modules-loader": "^1.7.0",
+    "webpack": "^3.10.0"
+  }
+}

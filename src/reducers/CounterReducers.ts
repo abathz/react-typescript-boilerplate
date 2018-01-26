@@ -1,19 +1,22 @@
-import { Action } from '../actions'
+import {
+  Action,
+  ActionType
+} from 'actions/type_const'
 
 interface StateReducers {
-  counter: number
+  res: string
 }
 
 const INITIAL_STATE = {
-  counter: 0
+  res: ''
 }
 
-export default (state: StateReducers = INITIAL_STATE, action: Action) => {
+export default (state: StateReducers = INITIAL_STATE, action: Action): StateReducers => {
   switch (action.type) {
-    case 'INCREMENT':
-      return { res: action.payload }
-    case 'DECREMENT':
-      return { res: action.payload }
+    case ActionType.INC:
+      return { ...state, res: action.payload }
+    case ActionType.DEC:
+      return { ...state, res: action.payload }
     default:
       return state
   }

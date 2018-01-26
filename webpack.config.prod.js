@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var OfflinePlugin = require('offline-plugin')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -69,6 +70,12 @@ module.exports = {
         warnings: false
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'public/vendor.bundle.js', minChunks: Infinity })
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'public/vendor.bundle.js', minChunks: Infinity }),
+    new OfflinePlugin({
+      ServiceWorker: {
+        output: 'src/sw.js'
+      },
+      AppCache: null
+    })
   ]
 }

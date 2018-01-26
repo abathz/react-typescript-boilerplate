@@ -1,19 +1,19 @@
-export type Action = {
-  type: string
-  payload?: string
-}
+import {
+  Action,
+  ActionType
+} from 'actions/type_const'
 
 export const increment = (): Action => {
   console.log('yayaya')
   return {
-    type: 'INCREMENT',
+    type: ActionType.INC,
     payload: 'Success INCREMENT'
   }
 }
 
 export const decrement = (): Action => {
   return {
-    type: 'DECREMENT',
+    type: ActionType.DEC,
     payload: 'Success DECREMENT'
   }
 }

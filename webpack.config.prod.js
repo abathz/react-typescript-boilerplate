@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OfflinePlugin = require('offline-plugin')
+var SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -76,6 +77,7 @@ module.exports = {
         output: 'src/sw.js'
       },
       AppCache: null
-    })
+    }),
+    new SimpleProgressWebpackPlugin()
   ]
 }

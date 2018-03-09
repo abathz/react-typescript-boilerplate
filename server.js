@@ -30,7 +30,6 @@ if (!isDevelopment) {
 } else {
   var config = require('./webpack.config.js')
   var compiler = webpack(config)
-  compiler.apply(new webpack.ProgressPlugin())
 
   app.use(express.static(__dirname))
 

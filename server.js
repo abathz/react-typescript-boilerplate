@@ -2,16 +2,8 @@ var express = require('express')
 var path = require('path')
 var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
-// var routes = require('./server/api')
 
 var app = express()
-
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET, POST')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-  next()
-})
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 

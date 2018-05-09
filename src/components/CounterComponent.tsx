@@ -1,12 +1,9 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { decrement, increment } from 'actions'
-import { bindActionCreators } from 'redux'
-
-interface PropsComponent extends StateProps, DispatchProps {}
 
 interface StateProps {
-  counter: string
+  counter: number
 }
 
 interface DispatchProps {
@@ -14,6 +11,7 @@ interface DispatchProps {
   decrement: typeof decrement
 }
 
+interface PropsComponent extends StateProps, DispatchProps { }
 interface StateComponent { }
 
 class CounterComponent extends React.Component<PropsComponent, StateComponent> {
@@ -29,7 +27,7 @@ class CounterComponent extends React.Component<PropsComponent, StateComponent> {
   render () {
     const { counter } = this.props
     return <div>
-      <pre>counter = {counter}</pre>
+      <pre>counter = {counter < 0 ? 0 : counter}</pre>
       <button onClick={this._onClickIncrement}>click me INCREMENT!</button>
       <button onClick={this._onClickDecrement}>click me DECREMENT!</button>
     </div>
@@ -37,7 +35,7 @@ class CounterComponent extends React.Component<PropsComponent, StateComponent> {
 }
 
 const mapStateToProps = ({ counter }: any): StateProps => ({
-  counter: counter.res
+  counter: counter.counter
 })
 
 export default connect(mapStateToProps, { increment, decrement })(CounterComponent)

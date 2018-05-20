@@ -1,19 +1,17 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
   entry: {
-    main: [
-      './src/index.tsx'
-    ],
+    app: './src/index.tsx',
     vendor: ['jquery', 'popper.js', 'bootstrap']
   },
   output: {
     path: __dirname,
-    publicPath: '/',
-    filename: 'public/bundle.js'
+    filename: 'public/[name].bundle.js'
   },
   module: {
     rules: [
@@ -25,11 +23,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract('css-loader')
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract('css-loader!sass-loader')
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -47,9 +51,8 @@ module.exports = {
     }
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'public/site.css',
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: 'public/site.css'
     }),
     new webpack.ProvidePlugin({
       Popper: ['popper.js', 'default'],
@@ -57,7 +60,6 @@ module.exports = {
       jQuery: 'jquery',
       React: 'react'
     }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'public/vendor.bundle.js', minChunks: 1000 }),
     new SimpleProgressWebpackPlugin()
   ]
 }

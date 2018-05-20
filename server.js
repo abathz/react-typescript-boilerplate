@@ -36,5 +36,5 @@ if (!isDevelopment) {
     res.sendFile(path.resolve(__dirname, 'index.html'))
   })
 
-  app.listen(8080)
+  app.listen(8000)
 }

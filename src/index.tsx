@@ -7,10 +7,10 @@ import Routes from './routes'
 import reducers from './reducers'
 import './assets/scss'
 
-const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore)
+const store = createStore(reducers, applyMiddleware(ReduxThunk))
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Routes />
   </Provider>,
   document.getElementById('main'))

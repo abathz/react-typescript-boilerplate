@@ -1,21 +1,18 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OfflinePlugin = require('offline-plugin')
-var SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
+var MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
+  mode: 'production',
   devtool: 'cheap-module-source-map',
   entry: {
-    main: [
-      './src/index.tsx'
-    ],
+    app: './src/index.tsx',
     vendor: ['jquery', 'popper.js', 'bootstrap']
   },
   output: {
     path: __dirname,
-    publicPath: '/',
-    filename: 'public/bundle.js'
+    publicPath: './',
+    filename: 'public/[name].bundle.js'
   },
   module: {
     rules: [
@@ -27,17 +24,27 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract('css-loader')
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract('css-loader!sass-loader')
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: 'file-loader?name=public/fonts/[name].[ext]'
       }
     ]
+  },
+  optimization: {
+    minimize: true,
+    noEmitOnErrors: true
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -48,12 +55,11 @@ module.exports = {
       reducers: path.resolve(__dirname, 'src/reducers')
     }
   },
+  performance: { hints: false },
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'public/site.css',
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: 'public/site.css'
     }),
-    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.ProvidePlugin({
       Popper: ['popper.js', 'default'],
@@ -64,20 +70,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      minimize: true,
-      compressor: {
-        warnings: false
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'public/vendor.bundle.js', minChunks: Infinity }),
     new OfflinePlugin({
       ServiceWorker: {
         output: 'src/sw.js'
       },
       AppCache: null
     }),
-    new SimpleProgressWebpackPlugin()
   ]
 }

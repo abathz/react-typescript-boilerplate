@@ -25,10 +25,7 @@ if (!isDevelopment) {
 
   app.use(express.static(__dirname))
 
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    stats: { colors: true }
-  }))
+  app.use(webpackDevMiddleware(compiler))
 
   // app.use('/api', routes)
 

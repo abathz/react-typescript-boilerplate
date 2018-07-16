@@ -1,6 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-var MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const path = require('path')
+const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -11,7 +13,6 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    publicPath: './',
     filename: 'public/[name].bundle.js'
   },
   module: {
@@ -23,14 +24,7 @@ module.exports = {
         use: 'ts-loader'
       },
       {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader'
@@ -70,11 +64,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new OfflinePlugin({
-      ServiceWorker: {
-        output: 'src/sw.js'
-      },
-      AppCache: null
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast 
+      // and not allow any straggling "old" SWs to hang around
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true
     }),
+    new SimpleProgressWebpackPlugin()
   ]
 }

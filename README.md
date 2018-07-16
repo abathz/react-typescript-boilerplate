@@ -39,7 +39,7 @@ In order to run the application:
    $ npm start
    ```
 
-By default, client-side will up on [`http://localhost:8080`](http://localhost:8080)
+By default, client-side will up on [`http://localhost:3000`](http://localhost:3000)
 
 If you want to colaborate with this repo, you can fork this repo and i will really appreciate to make this repo useful for everyone.
 

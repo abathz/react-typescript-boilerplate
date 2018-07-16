@@ -1,7 +1,6 @@
-var path = require('path')
-var webpack = require('webpack')
-var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
@@ -52,7 +51,6 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       React: 'react'
-    }),
-    new SimpleProgressWebpackPlugin()
+    })
   ]
 }

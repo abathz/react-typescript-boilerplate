@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import CounterComponent from 'components/CounterComponent'
-
 class App extends React.Component<{}, {}> {
   render () {
-    return <CounterComponent />
+    return (
+        <div>Welcome to React Typescript</div>
+    )
   }
 }
 
